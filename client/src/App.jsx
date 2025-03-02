@@ -1,4 +1,5 @@
-
+import Header from "./components/Header"
+import UserList from "./components/UserList"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -6,16 +7,12 @@ function App() {
   return (
     <>
       {/* <!-- Header component --> */}
-  <header class="header">
-    <div class="logo">
-      <span class="course">React Workshop - September 2023</span>
-    </div>
-  </header>
+    <Header/>
 
   {/* <!-- Main component  --> */}
   <main class="main">
     {/* <!-- Section component  --> */}
-    
+    <UserList/>
 
     {/* <!-- User details component  --> */}
     {/* <!-- <div class="overlay"> */}
