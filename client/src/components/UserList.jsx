@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Pagination from "./Pagination";
 import Search from "./Search";
@@ -7,10 +7,12 @@ import userService from "../services/userService.js";
 
 export default function UserList(){
 
+  const [users,setUsers] = useState([]);
+
     useEffect(()=>{
       userService.getAll()
         .then(result=>{
-          console.log(result);
+          setUsers(result);
         })
     },[]);
 
