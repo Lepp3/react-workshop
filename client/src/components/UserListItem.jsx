@@ -1,16 +1,25 @@
-export default function UserListItem(props){
+import { fromIsoDate } from "../utils/datetimeUtils.js";
+
+export default function UserListItem({
+  firstName,
+  lastName,
+  email,
+  phoneNumber,
+  createdAt,
+  imageUrl
+}){
   
     return(
       <tr>
       <td>
-        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-          alt="Peter's profile" className="image" />
+        <img src={imageUrl}
+          alt={`${firstName}'s profile`} className="image" />
       </td>
-      <td>{props.firstName}</td>
-      <td>{props.lastName}</td>
-      <td>{props.email}</td>
-      <td>{props.phoneNumber}</td>
-      <td>{props.createdAt}</td>
+      <td>{firstName}</td>
+      <td>{lastName}</td>
+      <td>{email}</td>
+      <td>{phoneNumber}</td>
+      <td>{fromIsoDate(createdAt)}</td>
 
       <td className="actions">
         <button className="btn edit-btn" title="Edit">
