@@ -5,6 +5,7 @@ import Search from "./Search";
 import UserListItem from "./UserListItem";
 import userService from "../services/userService.js";
 import CreateUser from "./CreateUser.jsx";
+import UserInfo from "./UserInfo.jsx";
 
 export default function UserList(){
 
@@ -40,6 +41,11 @@ export default function UserList(){
       setShowCreate(false);
 
 
+    };
+
+
+    const userInfoClickHandler = () =>{
+
     }
 
 
@@ -47,10 +53,13 @@ export default function UserList(){
         <section className="card users-container">
           <Search/>
           {showCreate && 
-          <CreateUser 
+          (<CreateUser 
           onClose={closeCreateUserClickHandler}
           onSave={saveCreateUserClickHandler}
-          />}
+          />)
+          }
+
+          <UserInfo/>
       {/* <!-- Table component --> */}
       <div className="table-wrapper">
         {/* <!-- Overlap components  --> */}
@@ -162,7 +171,7 @@ export default function UserList(){
           </thead>
           <tbody>
             {/* <!-- Table row component --> */}
-            {users.map(user=><UserListItem key={user._id} {...user}/>)}
+            {users.map(user=><UserListItem key={user._id} onInfoClick={userInfoClickHandler} {...user}/>)}
             
           </tbody>
         </table>
