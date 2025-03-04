@@ -20,13 +20,17 @@ export default function UserList(){
 
     const createUserClickHandler = () => {
       setShowCreate(true);
+    };
+
+    const closeCreateUserClickHandler = () =>{
+      setShowCreate(false);
     }
 
 
     return(
         <section className="card users-container">
           <Search/>
-          {showCreate && <CreateUser/>}
+          {showCreate && <CreateUser onClose={closeCreateUserClickHandler}/>}
       {/* <!-- Table component --> */}
       <div className="table-wrapper">
         {/* <!-- Overlap components  --> */}
