@@ -11,6 +11,7 @@ export default function UserList(){
 
   const [users,setUsers] = useState([]);
   const [showCreate,setShowCreate] = useState(false);
+  const [userIdInfo,setUserIdInfo] = useState();
 
     useEffect(()=>{
       userService.getAll()
@@ -44,8 +45,8 @@ export default function UserList(){
     };
 
 
-    const userInfoClickHandler = () =>{
-
+    const userInfoClickHandler = (userId) =>{
+      setUserIdInfo(userId)
     }
 
 
@@ -59,7 +60,9 @@ export default function UserList(){
           />)
           }
 
-          <UserInfo/>
+          {userIdInfo && (
+            <UserInfo
+            userId={userIdInfo}/>)}
       {/* <!-- Table component --> */}
       <div className="table-wrapper">
         {/* <!-- Overlap components  --> */}
