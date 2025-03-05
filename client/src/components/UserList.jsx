@@ -11,7 +11,7 @@ export default function UserList(){
 
   const [users,setUsers] = useState([]);
   const [showCreate,setShowCreate] = useState(false);
-  const [userIdInfo,setUserIdInfo] = useState();
+  const [userIdInfo,setUserIdInfo] = useState(null);
 
     useEffect(()=>{
       userService.getAll()
@@ -46,7 +46,9 @@ export default function UserList(){
 
 
     const userInfoClickHandler = (userId) =>{
+      
       setUserIdInfo(userId)
+
     }
 
 
