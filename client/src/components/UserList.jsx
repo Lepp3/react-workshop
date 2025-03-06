@@ -6,12 +6,14 @@ import UserListItem from "./UserListItem";
 import userService from "../services/userService.js";
 import CreateUser from "./CreateUser.jsx";
 import UserInfo from "./UserInfo.jsx";
+import DeleteUser from "./DeleteUser.jsx";
 
 export default function UserList(){
 
   const [users,setUsers] = useState([]);
   const [showCreate,setShowCreate] = useState(false);
   const [userIdInfo,setUserIdInfo] = useState(null);
+  const [userIdDelete,setUserIdDelete] = useState(null);
 
     useEffect(()=>{
       userService.getAll()
@@ -55,6 +57,22 @@ export default function UserList(){
       setUserIdInfo(null);
     }
 
+    const userDeleteClickHandler = (userId) =>{
+      setUserIdDelete(userId);
+    }
+
+    const userDeleteCloseHandler = () =>{
+      setUserIdDelete(null);
+    }
+
+    const userDeleteHandler = async () =>{
+      await userService.deleteOne(userIdDelete);
+
+      setUsers(oldUsers => oldUsers.filter(user=> user._id !== userIdDelete));
+
+      setUserIdDelete(null);
+    }
+
 
     return(
         <section className="card users-container">
@@ -71,6 +89,10 @@ export default function UserList(){
             userId={userIdInfo}
             onClose={userInfoCloseHandler}
             />)}
+
+            {userIdDelete && <DeleteUser 
+            onClose={userDeleteCloseHandler}
+            onDelete={userDeleteHandler}/>}
       {/* <!-- Table component --> */}
       <div className="table-wrapper">
         {/* <!-- Overlap components  --> */}
@@ -182,7 +204,10 @@ export default function UserList(){
           </thead>
           <tbody>
             {/* <!-- Table row component --> */}
-            {users.map(user=><UserListItem key={user._id} onInfoClick={userInfoClickHandler} {...user}/>)}
+            {users.map(user=><UserListItem key={user._id} 
+            onInfoClick={userInfoClickHandler} 
+            {...user}
+            onDeleteClick={userDeleteClickHandler}/>)}
             
           </tbody>
         </table>
