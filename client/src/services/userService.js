@@ -42,6 +42,7 @@ export default {
     async update(userId,userData){
 
         const postData = transformUserData(userData);
+        postData._id = userId;
 
         const response = await fetch (`${baseUrl}/${userId}`,{
             method: 'PUT',

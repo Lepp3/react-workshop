@@ -36,7 +36,7 @@ export default function UserList(){
     const saveCreateUserClickHandler = async (e) =>{
       e.preventDefault();
       
-      const formData = new FormData(e.target);
+      const formData = new FormData(e.target.parentElement.parentElement);
       const userData = Object.fromEntries(formData);
 
       const newUser = await userService.create(userData);
@@ -87,7 +87,7 @@ export default function UserList(){
       e.preventDefault();
 
 
-      const formData = new FormData(e.target);
+      const formData = new FormData(e.target.parentElement.parentElement);
       const userData = Object.fromEntries(formData);
 
 
