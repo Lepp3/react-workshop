@@ -1,14 +1,17 @@
 export default function CreateUser({
+    userId,
     onClose,
-    onSave
+    onSave,
+    onEdit
 }){
+   
     return(
         <div className="overlay">
       <div className="backdrop" onClick={onClose}></div>
       <div className="modal">
         <div className="user-container">
           <header className="headers">
-            <h2>Edit User/Add User</h2>
+            <h2>{userId? 'Update' : 'Add'} User</h2>
             <button className="btn close" onClick={onClose}>
               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -18,7 +21,7 @@ export default function CreateUser({
               </svg>
             </button>
           </header>
-          <form onSubmit={onSave}>
+          <form>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
@@ -95,7 +98,11 @@ export default function CreateUser({
               </div>
             </div>
             <div id="form-actions">
-              <button id="action-save" className="btn" type="submit" >Save</button>
+              {!userId? 
+              <button id="action-save" className="btn" type="submit" onClick={onSave}>Save</button>
+              : <button id="action-save" className="btn" type="submit" onClick={onEdit}>Edit</button>
+              }
+              
               <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                 Cancel
               </button>
